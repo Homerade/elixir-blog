@@ -1,0 +1,35 @@
+<header class="post-list__header">
+  <h1>Posts</h1>
+  <div class="post-list__header-nav">
+    <span>Search?</span>
+    <span>Tag dropdown?</span>
+    <span><%= link "New Post", to: Routes.post_path(@conn, :new) %></span>
+  </div>  
+</header>
+<table>
+  <thead></thead>
+  <tbody>
+    <%= for post <- @posts do %>
+        <tr data-href="<%= Routes.post_url(@conn, :show, post) %>">
+          <td class="post-list__row_post-title"><%= post.title %></td>
+          <td><%= post.body %></td>
+
+          <td class="post-list__row_post-controls">
+            <span><%= link "Edit", to: Routes.post_path(@conn, :edit, post) %></span>
+            <span><%= link "Delete", to: Routes.post_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure?"] %></span>
+          </td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script>
+  var elements = document.querySelectorAll('[data-href]')
+  
+  elements.forEach(el =>
+    el.addEventListener('click', (e) => {
+      var path = el.getAttribute('data-href')
+      window.location.assign(path)
+    })
+  )
+</script>
