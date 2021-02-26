@@ -5,6 +5,7 @@ WIP
 * practicum: ongoing updates to UI in Phoenix for me and site improvement 🤠
 * posts: personal tech notes on things I'm looking at and want to keep more detailed info on
 * practicum: [BEM](http://getbem.com/introduction/) -- Blocks, Elements and Modifiers, CSS naming convention methodology
+  * extra info on [BEM](https://drive.google.com/drive/u/3/folders/1AuxjRtB0NGM7ug4RxovwTGuyIAAuPd3s)
 
 ## Get it running
 
