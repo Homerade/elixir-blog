@@ -2,8 +2,9 @@
 Greenfields Elixir project
 
 WIP
-* Update Phoenix views as I go for Phoenix improvement for me and the site
-* posts: personal tech notes on things I'm looking at
+* practicum: ongoing updates to UI in Phoenix for me and site improvement 🤠
+* posts: personal tech notes on things I'm looking at and want to keep more detailed info on
+* practicum: [BEM](http://getbem.com/introduction/) -- Blocks, Elements and Modifiers, CSS naming convention methodology
 
 ## Get it running
 
