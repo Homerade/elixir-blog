@@ -3,7 +3,7 @@ Greenfields Elixir project
 
 WIP
 * Update Phoenix views as I go for Phoenix improvement for me and the site
-* posts: personal notes on things I'm looking at
+* posts: personal tech notes on things I'm looking at
 
 ## Get it running
 
