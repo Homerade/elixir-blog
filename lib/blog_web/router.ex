@@ -13,13 +13,27 @@ defmodule BlogWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :logged_in do
+    # plug Web.Plugs.EnsureUser, as: :web
+  end
+
   scope "/", BlogWeb do
     pipe_through :browser
 
     get "/", PageController, :index
 
     resources "/posts", PostController
+
+    # post "/login", SessionController, :create
+    # post "/login", SessionController, :new
+
+    resources "/create-account", RegistrationController, only: [:create, :new]
   end
+
+  # scope "/", BlogWeb do
+  #   pipe_through([:browser, :logged_in])
+
+  # end
 
   # Other scopes may use custom stacks.
   # scope "/api", BlogWeb do

@@ -1,21 +1,13 @@
 <section class="phx-hero">
   <h1>How to design a website 101</h1>
-  <%= link("blog posts", to: Routes.post_path(@conn, :index)) %>
 </section>
 
 <section class="row">
   <article class="column">
-    Something will go here
-    </br>
-    a po
-    </br>
-    </br>
-    by S Vizzi
+    <%= link("blog posts", to: Routes.post_path(@conn, :index)) %>
   </article>
   <article class="column">
-    I promise
-    </br>
-    em
+    <%= link("sign up", to: Routes.registration_path(@conn, :new)) %>
+    <%#= link("new post", to: Routes.post_path(@conn, :new)) %>
   </article>
-  <%= link("request a posts", to: Routes.post_path(@conn, :new)) %>
 </section>
