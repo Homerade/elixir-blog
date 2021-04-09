@@ -17,6 +17,10 @@ defmodule BlogWeb.Router do
     # plug Web.Plugs.EnsureUser, as: :web
   end
 
+  if Mix.env == :dev do
+    forward "/sent_emails", Bamboo.EmailPreviewPlug
+  end
+
   scope "/", BlogWeb do
     pipe_through :browser
 

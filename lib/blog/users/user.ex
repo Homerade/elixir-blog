@@ -12,6 +12,8 @@ defmodule Blog.Users.User do
     field(:email_verified_at, :utc_datetime)
     field(:password_reset_token, Ecto.UUID)
     field(:password_reset_expires_at, :utc_datetime)
+
+    timestamps()
   end
 
   def create_changeset(struct, attributes) do
@@ -26,7 +28,10 @@ defmodule Blog.Users.User do
       :password_reset_expires_at
     ])
     |> validate_required([:email])
+    |> validate_required([:password])
     |> validate_confirmation(:password)
+    |> validate_format(:email, ~r/.+@.+\..+/)
+    |> unique_constraint(:email)
     |> Accounts.trim_field(:email)
     |> Accounts.downcase_field(:email)
     |> Accounts.hash_password()
