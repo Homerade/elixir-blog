@@ -18,7 +18,7 @@ defmodule BlogWeb.Router do
   end
 
   if Mix.env == :dev do
-    forward "/sent_emails", Bamboo.EmailPreviewPlug
+    forward "/sent_emails", Bamboo.SentEmailViewerPlug
   end
 
   scope "/", BlogWeb do

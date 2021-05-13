@@ -5,6 +5,7 @@ defmodule BlogWeb.RegistrationController do
   alias Blog.Users.User
   alias Blog.Mailer
   alias Blog.Email
+
   def new(conn, _params) do
     conn
     |> assign(:changeset, Ecto.Changeset.change(%User{}, %{}))
@@ -14,13 +15,12 @@ defmodule BlogWeb.RegistrationController do
   def create(conn, %{"user" => params}) do
     case Users.create(params) do
       {:ok, _user} ->
-        send_email_verification_email()
+        send_verification_email(params["email"])
         conn
         |> put_flash(:info, "Account Created!")
         |> redirect(to: Routes.page_path(conn, :index))
 
       {:error, changeset} ->
-
         conn
         |> put_status(422)
         |> assign(:changeset, changeset)
@@ -28,8 +28,8 @@ defmodule BlogWeb.RegistrationController do
     end
   end
 
-  defp send_email_verification_email do
-    Email.reset_password_email
+  defp send_verification_email(user) do
+    Email.verification_email(user)
     |> Mailer.deliver_now
   end
 
