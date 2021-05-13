@@ -30,7 +30,7 @@ defmodule BlogWeb.RegistrationController do
 
   defp send_verification_email(user) do
     Email.verification_email(user)
-    |> Mailer.deliver_now
+    |> Mailer.deliver_now()
   end
 
   defp send_reset_password_email do

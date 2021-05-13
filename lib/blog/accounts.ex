@@ -1,5 +1,4 @@
 defmodule Blog.Accounts do
-
   require Ecto.Query
 
   @doc """
@@ -63,7 +62,6 @@ defmodule Blog.Accounts do
     |> Ecto.Changeset.put_change(:email_verified_at, nil)
   end
 
-
   # LOGGIN IN
 
   @doc """
@@ -73,6 +71,7 @@ defmodule Blog.Accounts do
   - `email`, type `:string`
   - `password_hash`, type `:string`
   """
+
   # def validate_login(repo, schema, email, password) do
   #   case find_by_email(repo, schema, email) do
   #     {:error, :not_found} ->

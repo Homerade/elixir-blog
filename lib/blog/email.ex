@@ -1,6 +1,6 @@
 defmodule Blog.Email do
   import Bamboo.Email
-  import Bamboo.Phoenix
+  # import Bamboo.Phoenix
 
   def reset_password_email do
     new_email(

@@ -30,9 +30,8 @@ config :blog, BlogWeb.Endpoint,
     ]
   ]
 
-config :blog, Blog.Mailer,
-  adapter: Bamboo.LocalAdapter
-  # open_email_in_browser_url: "http://localhost:4000/sent_emails"
+config :blog, Blog.Mailer, adapter: Bamboo.LocalAdapter
+# open_email_in_browser_url: "http://localhost:4000/sent_emails"
 
 # ## SSL Support
 #
