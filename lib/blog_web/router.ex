@@ -28,16 +28,20 @@ defmodule BlogWeb.Router do
 
     resources "/posts", PostController
 
+    resources "/password-reset", PasswordResetController, only: [:new, :create]
+
     # post "/login", SessionController, :create
     # post "/login", SessionController, :new
 
     resources "/create-account", RegistrationController, only: [:create, :new]
+
+    resources "/login", SessionController, only: [:new, :create]
   end
 
   scope "/", BlogWeb do
     pipe_through([:browser, :logged_in])
 
-    get "/dashbaord", DashboardController, :index
+    get "/dashboard", DashboardController, :index
   end
 
   # Other scopes may use custom stacks.

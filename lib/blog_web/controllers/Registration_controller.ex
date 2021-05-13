@@ -34,8 +34,8 @@ defmodule BlogWeb.RegistrationController do
     |> Mailer.deliver_now()
   end
 
-  defp send_reset_password_email do
-    Email.reset_password_email
-    |> Mailer.deliver_now
+  defp send_reset_password_email(user) do
+    Email.reset_password_email(user)
+    |> Mailer.deliver_now()
   end
 end

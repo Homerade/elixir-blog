@@ -9,5 +9,9 @@
   <article class="column">
     <%= link("sign up", to: Routes.registration_path(@conn, :new)) %>
     <%#= link("new post", to: Routes.post_path(@conn, :new)) %>
+    <%#= link("login", to: Routes._path(@conn, :new)) %>
+  </article>
+  <article>
+    <%= link("reset password", to: Routes.password_reset_path(@conn, :new)) %>
   </article>
 </section>

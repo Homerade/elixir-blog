@@ -47,7 +47,8 @@ defmodule Blog.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:elixir_uuid, "~> 1.2"},
-      {:bcrypt_elixir, "~> 2.0"}
+      {:bcrypt_elixir, "~> 2.0"},
+      {:stein, "~> 0.1.0"}
     ]
   end
 
