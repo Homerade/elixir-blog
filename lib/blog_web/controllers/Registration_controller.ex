@@ -16,9 +16,10 @@ defmodule BlogWeb.RegistrationController do
     case Users.create(params) do
       {:ok, _user} ->
         send_verification_email(params["email"])
+
         conn
         |> put_flash(:info, "Account Created!")
-        |> redirect(to: Routes.page_path(conn, :index))
+        |> redirect(to: Routes.dashboard_path(conn, :index))
 
       {:error, changeset} ->
         conn

@@ -34,10 +34,11 @@ defmodule BlogWeb.Router do
     resources "/create-account", RegistrationController, only: [:create, :new]
   end
 
-  # scope "/", BlogWeb do
-  #   pipe_through([:browser, :logged_in])
+  scope "/", BlogWeb do
+    pipe_through([:browser, :logged_in])
 
-  # end
+    get "/dashbaord", DashboardController, :index
+  end
 
   # Other scopes may use custom stacks.
   # scope "/api", BlogWeb do
