@@ -20,7 +20,7 @@ defmodule Blog.MixProject do
   def application do
     [
       mod: {Blog.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :bamboo]
     ]
   end
 
@@ -33,6 +33,7 @@ defmodule Blog.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:bamboo, "~> 1.1"},
       {:phoenix, "~> 1.5.7"},
       {:phoenix_ecto, "~> 4.1"},
       {:ecto_sql, "~> 3.4"},
@@ -44,7 +45,10 @@ defmodule Blog.MixProject do
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:elixir_uuid, "~> 1.2"},
+      {:bcrypt_elixir, "~> 2.0"},
+      {:stein, "~> 0.1.0"}
     ]
   end
 

@@ -1,0 +1,10 @@
+<h1>Dashboard</h1>
+
+<section class="row">
+  <article class="column">
+    <%= link("current posts", to: Routes.post_path(@conn, :index)) %>
+  </article>
+  <article class="column">
+    <%= link("create new post", to: Routes.post_path(@conn, :new)) %>
+  </article>
+</section>

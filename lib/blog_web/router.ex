@@ -13,12 +13,38 @@ defmodule BlogWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :logged_in do
+    # plug Web.Plugs.EnsureUser, as: :web
+  end
+
+  if Mix.env() == :dev do
+    forward "/sent_emails", Bamboo.SentEmailViewerPlug
+  end
+
   scope "/", BlogWeb do
     pipe_through :browser
 
     get "/", PageController, :index
 
     resources "/posts", PostController
+
+    get "/password-reset", PasswordResetController, :new
+
+    post "/password-reset", PasswordResetController, :create
+
+    get "/password-reset/verify/:token", PasswordResetController, :edit
+
+    post "/password-reset/verify", PasswordResetController, :update
+
+    resources "/create-account", RegistrationController, only: [:create, :new]
+
+    resources "/login", SessionController, only: [:new, :create]
+  end
+
+  scope "/", BlogWeb do
+    pipe_through([:browser, :logged_in])
+
+    get "/dashboard", DashboardController, :index
   end
 
   # Other scopes may use custom stacks.

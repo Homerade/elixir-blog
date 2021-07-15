@@ -1,0 +1,18 @@
+<div>
+  <h1>Password Reset</h1>
+  <%= form_for(@changeset, Routes.password_reset_path(@conn, :update), fn f -> %>
+    <input type="hidden" name="token" value="<%= @token %>" />
+
+    <div>
+      <p>
+      <%= password_input(f, :password, required: true, placeholder: "Password", class: "emed-auth__input-rect") %>
+    </div>
+    <div>
+      <p>
+      <%= password_input(f, :password_confirmation, required: true, placeholder: "Confirm Password", class: "emed-auth__input-rect") %>
+    </div>
+    <div>
+      <%= submit("RESET PASSWORD", class: "emed-btn-rect--primary") %>
+    </div>
+  <% end) %>
+</div>
