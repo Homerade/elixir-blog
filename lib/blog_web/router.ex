@@ -28,10 +28,13 @@ defmodule BlogWeb.Router do
 
     resources "/posts", PostController
 
-    resources "/password-reset", PasswordResetController, only: [:new, :create]
+    get "/password-reset", PasswordResetController, :new
 
-    # post "/login", SessionController, :create
-    # post "/login", SessionController, :new
+    post "/password-reset", PasswordResetController, :create
+
+    get "/password-reset/verify/:token", PasswordResetController, :edit
+
+    post "/password-reset/verify", PasswordResetController, :update
 
     resources "/create-account", RegistrationController, only: [:create, :new]
 

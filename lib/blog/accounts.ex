@@ -3,6 +3,8 @@ defmodule Blog.Accounts do
   require Ecto.Query
 
   alias Stein.Time
+  alias Blog.Email
+  alias Blog.Mailer
 
   @doc """
   Hash the changed password in a changeset

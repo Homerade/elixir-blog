@@ -68,7 +68,7 @@ defmodule Blog.Users do
       |> Ecto.Multi.run(:reset, fn _repo, _changes ->
         # Hey, future person.
         # Make Stein not ever return bare :error atom
-        case Stein.Accounts.reset_password(Repo, User, token, params) do
+        case Accounts.reset_password(Repo, User, token, params) do
           {:ok, value} ->
             {:ok, value}
 
@@ -79,17 +79,45 @@ defmodule Blog.Users do
             {:error, :stein_failure}
         end
       end)
-      |> Ecto.Multi.update(:unlock, fn %{reset: user} ->
-        Ecto.Changeset.change(user, %{locked_until: nil})
-      end)
       |> Repo.transaction()
 
     case result do
-      {:ok, %{unlock: user}} ->
+      {:ok, %{reset: user}} ->
         {:ok, user}
 
       {:error, _tag, changeset, _changes} ->
         {:error, changeset}
+    end
+  end
+
+  def validate_login(email, password) do
+    with {:ok, user} <- Accounts.find_by_email(Repo, User, email),
+         {:ok, user} <- check_password(user, password) do
+      {:ok, user}
+      # case is_nil(user.deleted_at) do
+      #   true ->
+      #     {:ok, user}
+
+      #   false ->
+      #     {:error, :invalid}
+      # end
+    else
+      {:error, :not_found} ->
+        Bcrypt.no_user_verify()
+        {:error, :invalid}
+
+      {:error, error} ->
+        {:error, error}
+    end
+  end
+
+  defp check_password(user, password) do
+    case Bcrypt.verify_pass(password, user.password_hash) do
+      true ->
+        {:ok, user}
+
+      false ->
+        {:error, :incorrect_password}
     end
   end
 end

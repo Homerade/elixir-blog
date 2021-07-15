@@ -7,11 +7,13 @@ defmodule Blog.Users.User do
   schema "users" do
     field(:email, :string)
     field(:password, :string, virtual: true)
+    field(:password_confirmation, :string, virtual: true)
     field(:password_hash, :string)
     field(:email_verification_token, Ecto.UUID)
     field(:email_verified_at, :utc_datetime)
     field(:password_reset_token, Ecto.UUID)
     field(:password_reset_expires_at, :utc_datetime)
+    field(:token, Ecto.UUID, read_after_writes: true)
 
     timestamps()
   end
@@ -27,6 +29,7 @@ defmodule Blog.Users.User do
       :password_reset_token,
       :password_reset_expires_at
     ])
+    |> put_change(:token, UUID.uuid4())
     |> validate_required([:email])
     |> validate_required([:password])
     |> validate_confirmation(:password)
