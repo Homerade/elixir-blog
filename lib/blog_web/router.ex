@@ -10,6 +10,7 @@ defmodule BlogWeb.Router do
   end
 
   pipeline :api do
+    plug CORSPlug, origin: ["http://localhost:3000"]
     plug :accepts, ["json"]
   end
 
@@ -39,12 +40,20 @@ defmodule BlogWeb.Router do
     resources "/create-account", RegistrationController, only: [:create, :new]
 
     resources "/login", SessionController, only: [:new, :create]
+
+    get "/planets", PlanetController, :index
   end
 
   scope "/", BlogWeb do
     pipe_through([:browser, :logged_in])
 
     get "/dashboard", DashboardController, :index
+  end
+
+  scope "/api", BlogWeb.Api, as: :api do
+    pipe_through :api
+
+    resources("/planets", PlanetController, only: [:create, :index])
   end
 
   # Other scopes may use custom stacks.
