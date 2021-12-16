@@ -3,8 +3,6 @@ defmodule Blog.Accounts do
   require Ecto.Query
 
   alias Stein.Time
-  alias Blog.Email
-  alias Blog.Mailer
 
   @doc """
   Hash the changed password in a changeset
@@ -77,26 +75,26 @@ defmodule Blog.Accounts do
   # - `password_hash`, type `:string`
   # """
 
-  # def validate_login(repo, schema, email, password) do
-  #   case find_by_email(repo, schema, email) do
-  #     {:error, :not_found} ->
-  #       Bcrypt.no_user_verify()
-  #       {:error, :invalid}
+  def validate_login(repo, schema, email, password) do
+    case find_by_email(repo, schema, email) do
+      {:error, :not_found} ->
+        Bcrypt.no_user_verify()
+        {:error, :not_found}
 
-  #     {:ok, user} ->
-  #       check_password(user, password)
-  #   end
-  # end
+      {:ok, user} ->
+        check_password(user, password)
+    end
+  end
 
-  # defp check_password(user, password) do
-  #   case Bcrypt.verify_pass(password, user.password_hash) do
-  #     true ->
-  #       {:ok, user}
+  def check_password(user, password) do
+    case Bcrypt.verify_pass(password, user.password_hash) do
+      true ->
+        {:ok, user}
 
-  #     false ->
-  #       {:error, :invalid}
-  #   end
-  # end
+      false ->
+        {:error, :incorrect_password}
+    end
+  end
 
   @doc """
   Find a user by their email address

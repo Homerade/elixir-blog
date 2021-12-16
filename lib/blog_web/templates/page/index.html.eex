@@ -7,11 +7,6 @@
     <%= link("blog posts", to: Routes.post_path(@conn, :index)) %>
   </article>
   <article class="column">
-    <%= link("sign up", to: Routes.registration_path(@conn, :new)) %>
-    <%#= link("new post", to: Routes.post_path(@conn, :new)) %>
-    <%#= link("login", to: Routes._path(@conn, :new)) %>
-  </article>
-  <article>
-    <%= link("reset password", to: Routes.password_reset_path(@conn, :new)) %>
+    <%= link("see the planets", to: Routes.planet_path(@conn, :index)) %>
   </article>
 </section>

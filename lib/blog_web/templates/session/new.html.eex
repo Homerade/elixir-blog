@@ -1,17 +1,17 @@
-<div class="emed-auth-page__container">
+<div>
   <h1>User Login</h1>
-  <%= form_for(@conn, Routes.session_path(@conn, :create), [as: :user, class: "emed-form__container"], fn f -> %>
-    <div class="emed-form__input-group">
-      <p class="emed-text--s">Email Address</p>
-      <%= text_input(f, :email, type: :email, required: true, placeholder: "Email", class: "emed-auth__input-rect") %>
+  <%= form_for(@conn, Routes.session_path(@conn, :create), [as: :user], fn f -> %>
+    <div>
+      <p>Email Address</p>
+      <%= text_input(f, :email, type: :email, required: true, placeholder: "Email") %>
     </div>
-    <div class="emed-form__input-group">
-      <p class="emed-text--s">Password</p>
-      <%= password_input(f, :password, required: true, placeholder: "Password", class: "emed-auth__input-rect") %>
+    <div>
+      <p>Password</p>
+      <%= password_input(f, :password, required: true, placeholder: "Password") %>
     </div>
-    <div class="emed-form__btns-container">
-      <%= submit("LOGIN", class: "emed-btn-rect--primary") %>
-      <%= link("FORGOT YOUR PASSWORD?", to: Routes.password_reset_path(@conn, :new), class: "emed-btn-text--primary") %>
+    <div class="column">
+      <%= submit("LOGIN", class: "btn-primary") %>
+      <%= link("forgot your password?", to: Routes.password_reset_path(@conn, :new)) %>
     </div>
   <% end) %>
 </div>

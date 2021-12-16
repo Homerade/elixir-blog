@@ -22,6 +22,25 @@ defmodule Blog.Users do
   end
 
   @doc """
+  Find a user by a token
+  """
+  def get_by_token(token) do
+    case Ecto.UUID.cast(token) do
+      {:ok, token} ->
+        case Repo.get_by(User, token: token) do
+          nil ->
+            {:error, :not_found}
+
+          user ->
+            {:ok, user}
+        end
+
+      :error ->
+        {:error, :not_found}
+    end
+  end
+
+  @doc """
   Send user welcome email to pending users
   Sets their password_reset_expires_at to 48 hours
   """
@@ -92,7 +111,7 @@ defmodule Blog.Users do
 
   def validate_login(email, password) do
     with {:ok, user} <- Accounts.find_by_email(Repo, User, email),
-         {:ok, user} <- check_password(user, password) do
+         {:ok, user} <- Accounts.check_password(user, password) do
       {:ok, user}
       # case is_nil(user.deleted_at) do
       #   true ->
@@ -108,16 +127,6 @@ defmodule Blog.Users do
 
       {:error, error} ->
         {:error, error}
-    end
-  end
-
-  defp check_password(user, password) do
-    case Bcrypt.verify_pass(password, user.password_hash) do
-      true ->
-        {:ok, user}
-
-      false ->
-        {:error, :incorrect_password}
     end
   end
 end
