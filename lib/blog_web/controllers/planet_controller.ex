@@ -1,13 +1,13 @@
 defmodule BlogWeb.PlanetController do
-	use BlogWeb, :controller
+  use BlogWeb, :controller
 
-	alias Blog.Planets
+  alias Blog.Planets
 
-	def index(conn, _params) do
-		planets = Planets.all()
+  def index(conn, _params) do
+    planets = Planets.all()
 
-		conn
-		|> assign(:planets, planets)
-		|> render("index.html")
-	end
+    conn
+    |> assign(:planets, planets)
+    |> render("index.html")
+  end
 end

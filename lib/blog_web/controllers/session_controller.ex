@@ -3,6 +3,8 @@ defmodule BlogWeb.SessionController do
 
   alias Blog.Users
 
+  plug(Web.Plugs.EnsureUser when action in [:logout_user])
+
   def new(conn, _params) do
     render(conn, "new.html")
   end
@@ -19,5 +21,13 @@ defmodule BlogWeb.SessionController do
         |> put_flash(:error, "Could not sign you in")
         |> redirect(to: Routes.session_path(conn, :new))
     end
+  end
+
+  def logout_user(conn, _params) do
+    %{current_user: user} = conn.assigns
+
+    conn
+    |> clear_session()
+    |> redirect(to: Routes.session_path(conn, :new))
   end
 end

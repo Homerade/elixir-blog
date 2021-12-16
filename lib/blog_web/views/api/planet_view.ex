@@ -3,12 +3,12 @@ defmodule BlogWeb.Api.PlanetView do
 
   def render("index.json", %{planets: planets}) do
     render_many(planets, __MODULE__, "show.json")
-	end
+  end
 
   def render("show.json", %{planet: planet}) do
-		%{
-			id: planet.id,
-			name: planet.name,
+    %{
+      id: planet.id,
+      name: planet.name,
       mass: planet.mass,
       diameter: planet.diameter,
       density: planet.density,
@@ -29,6 +29,6 @@ defmodule BlogWeb.Api.PlanetView do
       numberOfMoons: planet.numberOfMoons,
       hasRingSystem: planet.hasRingSystem,
       hasGlobalMagneticField: planet.hasGlobalMagneticField
-		}
-	end
+    }
+  end
 end

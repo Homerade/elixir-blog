@@ -7,15 +7,17 @@ defmodule BlogWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Web.Plugs.SetUser
   end
 
   pipeline :api do
     plug CORSPlug, origin: ["http://localhost:3000"]
     plug :accepts, ["json"]
+    plug :fetch_session
   end
 
   pipeline :logged_in do
-    # plug Web.Plugs.EnsureUser, as: :web
+    plug Web.Plugs.EnsureUser, as: :web
   end
 
   if Mix.env() == :dev do
@@ -40,6 +42,7 @@ defmodule BlogWeb.Router do
     resources "/create-account", RegistrationController, only: [:create, :new]
 
     resources "/login", SessionController, only: [:new, :create]
+    get "/logout", SessionController, :logout_user
 
     get "/planets", PlanetController, :index
   end
@@ -48,6 +51,8 @@ defmodule BlogWeb.Router do
     pipe_through([:browser, :logged_in])
 
     get "/dashboard", DashboardController, :index
+
+    # resources "/posts", PostController
   end
 
   scope "/api", BlogWeb.Api, as: :api do

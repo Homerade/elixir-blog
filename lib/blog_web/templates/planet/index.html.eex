@@ -2,7 +2,13 @@
   <h1>PLANETS!🪐</h1>
 </header>
 <table>
-  <thead></thead>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Mass</th>
+    </tr>
+  </thead>
   <tbody>
     <%= for planet <- @planets do %>
         <tr>
