@@ -12,7 +12,7 @@
     <%= for post <- @posts do %>
         <tr class="post-list__row" data-href="<%= Routes.post_url(@conn, :show, post) %>">
           <td class="post-list__row_post-title"><%= post.title %></td>
-          <td><%= post.body %></td>
+          <td><%= HtmlSanitizeEx.strip_tags(render_list_body(post.body)) %></td>
 
           <td class="post-list__row_post-controls">
             <span><%= link "Edit", to: Routes.post_path(@conn, :edit, post) %></span>
@@ -31,4 +31,7 @@
       window.location.assign(path)
     })
   )
+
+  let post = document.querySelector(".post-list__row")
+  post.style.borderTop = '1px solid #eaeaea';
 </script>

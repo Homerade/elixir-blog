@@ -28,7 +28,12 @@ defmodule BlogWeb.PostController do
 
   def show(conn, %{"id" => id}) do
     post = Posts.get_post!(id)
-    render(conn, "show.html", post: post)
+    html = Earmark.as_html!(post.body)
+
+    conn
+    |> assign(:title, post.title)
+    |> assign(:post, html)
+    |> render("show.html")
   end
 
   def edit(conn, %{"id" => id}) do
