@@ -37,6 +37,7 @@ defmodule Blog.MixProject do
       {:phoenix, "~> 1.5.7"},
       {:phoenix_ecto, "~> 4.1"},
       {:ecto_sql, "~> 3.4"},
+      {:earmark, "~> 1.4.19"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
@@ -48,6 +49,7 @@ defmodule Blog.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:elixir_uuid, "~> 1.2"},
       {:bcrypt_elixir, "~> 2.0"},
+      {:html_sanitize_ex, "~> 1.4"},
       {:stein, "~> 0.1.0"},
       {:cors_plug, "~> 2.0"}
     ]
