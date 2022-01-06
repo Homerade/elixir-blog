@@ -51,7 +51,8 @@ defmodule Blog.MixProject do
       {:bcrypt_elixir, "~> 2.0"},
       {:html_sanitize_ex, "~> 1.4"},
       {:stein, "~> 0.1.0"},
-      {:cors_plug, "~> 2.0"}
+      {:cors_plug, "~> 2.0"},
+      {:nimble_csv, "~> 1.1"}
     ]
   end
 
